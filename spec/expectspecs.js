@@ -270,25 +270,25 @@ describe("to.have.cssclass", function() {
     });
 
     it("should pass if object matches selector", function() {
-      expect($('#sandbox')).to.be('#sandbox');
+      expect($('#sandbox')).to.matchSelector('#sandbox');
     });
 
     it("should pass negated if object does not match selector", function() {
-      expect($('#sandbox')).not.to.be('#wrong-id');
+      expect($('#sandbox')).not.to.matchSelector('#wrong-id');
     });
   });
 
-  describe("to.contain", function() {
+  describe("to.containChild", function() {
     beforeEach(function() {
       setFixtures(sandbox().html('<span />'));
     });
 
     it("should pass if object contains selector", function() {
-      expect($('#sandbox')).to.contain('span');
+      expect($('#sandbox')).to.containChild('span');
     });
 
     it("should pass negated if object does not contain selector", function() {
-      expect($('#sandbox')).not.to.contain('div');
+      expect($('#sandbox')).not.to.containChild('div');
     });
   });
 
