@@ -1,8 +1,6 @@
 
 (function() {
-  var matchers = {
-    
-    //Note - can't use "class" as the method name because it's a reserved word
+  var assertions = {
     cssclass: function(className) {
       this.assert(this.obj.hasClass(className), 
                   "Expected element to have class " + className,
@@ -16,14 +14,14 @@
                     "Expected element to have attribute '" + attrName + "' with value other than '" + expectedValue + "'"
                    );
       else
-        this.assert(this.obj.attr(attrName) !== undefined,
+        this.assert(this.obj.attr(attrName),
                     "Expected element to have attribute " + attrName,
                     "Expected element to not have attribute " + attrName
                    );
     },
 
     id: function(id) {
-      this.assert(this.obj.prop("id") === id,
+      this.assert(this.obj.attr("id") === id,
                  "Expected element to have id '" + id + "'",
                  "Expected element to not have id '" + id + "'"
                  );
@@ -37,7 +35,7 @@
     },
 
     text: function(text) {
-      if (text && jQuery.isFunction(text.test)) {
+      if (text && $.isFunction(text.test)) {
         this.assert(text.test(this.obj.text()),
                     "Expected element text '" + this.obj.text() + "' to match regex '" + text.source + "'",
                     "Expected element text '" + this.obj.text() + "' to not match regex '" + text.source + "'"
@@ -159,12 +157,17 @@
   };
 
   normalizeHtmlTagCase = function(html) {
-    return jQuery('<div/>').append(html).html();
+    return $('<div/>').append(html).html();
   };
 
   if (typeof(expect) !== "undefined") {
-    for (var matcher in matchers) {
-      expect.Assertion.prototype[matcher] = matchers[matcher];
+    var assertionProtype;
+    if (typeof(expect.Assertion) !== "undefined")
+      assertionPrototype = expect.Assertion.prototype;
+
+    for (var assertion in assertions) {
+      if (!assertionPrototype[assertion.name])
+        assertionPrototype[assertion] = assertions[assertion];
     }
   }
 })();

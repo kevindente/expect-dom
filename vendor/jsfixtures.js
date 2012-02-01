@@ -1,48 +1,48 @@
 
 var readFixtures = function() {
-  return jQueryFixtures.getFixtures().proxyCallTo_('read', arguments);
+  return jsFixtures.getFixtures().proxyCallTo_('read', arguments);
 };
 
 var preloadFixtures = function() {
-  jQueryFixtures.getFixtures().proxyCallTo_('preload', arguments);
+  jsFixtures.getFixtures().proxyCallTo_('preload', arguments);
 };
 
 var loadFixtures = function() {
-  jQueryFixtures.getFixtures().proxyCallTo_('load', arguments);
+  jsFixtures.getFixtures().proxyCallTo_('load', arguments);
 };
 
 var setFixtures = function(html) {
-  jQueryFixtures.getFixtures().set(html);
+  jsFixtures.getFixtures().set(html);
 };
 
 var sandbox = function(attributes) {
-  return jQueryFixtures.getFixtures().sandbox(attributes);
+  return jsFixtures.getFixtures().sandbox(attributes);
 };
-jQueryFixtures = function() {
-  this.containerId = 'jquery-fixtures';
+jsFixtures = function() {
+  this.containerId = 'js-fixtures';
   this.fixturesCache_ = {};
   this.fixturesPath = 'spec/javascripts/fixtures';
 };
 
-jQueryFixtures.getFixtures = function() {
-  return jQueryFixtures.currentFixtures_ = jQueryFixtures.currentFixtures_ || new jQueryFixtures();
+jsFixtures.getFixtures = function() {
+  return jsFixtures.currentFixtures_ = jsFixtures.currentFixtures_ || new jsFixtures();
 };
 
-jQueryFixtures.prototype.set = function(html) {
+jsFixtures.prototype.set = function(html) {
   this.cleanUp();
   this.createContainer_(html);
 };
 
-jQueryFixtures.prototype.preload = function() {
+jsFixtures.prototype.preload = function() {
   this.read.apply(this, arguments);
 };
 
-jQueryFixtures.prototype.load = function() {
+jsFixtures.prototype.load = function() {
   this.cleanUp();
   this.createContainer_(this.read.apply(this, arguments));
 };
 
-jQueryFixtures.prototype.read = function() {
+jsFixtures.prototype.read = function() {
   var htmlChunks = [];
 
   var fixtureUrls = arguments;
@@ -53,41 +53,41 @@ jQueryFixtures.prototype.read = function() {
   return htmlChunks.join('');
 };
 
-jQueryFixtures.prototype.clearCache = function() {
+jsFixtures.prototype.clearCache = function() {
   this.fixturesCache_ = {};
 };
 
-jQueryFixtures.prototype.cleanUp = function() {
-  jQuery('#' + this.containerId).remove();
+jsFixtures.prototype.cleanUp = function() {
+  $('#' + this.containerId).remove();
 };
 
-jQueryFixtures.prototype.sandbox = function(attributes) {
+jsFixtures.prototype.sandbox = function(attributes) {
   var attributesToSet = attributes || {};
-  return jQuery('<div id="sandbox" />').attr(attributesToSet);
+  return $('<div id="sandbox" />').attr(attributesToSet);
 };
 
-jQueryFixtures.prototype.createContainer_ = function(html) {
+jsFixtures.prototype.createContainer_ = function(html) {
   var container;
-  if(html instanceof jQuery) {
-    container = jQuery('<div id="' + this.containerId + '" />');
+  if(html instanceof $.fn.constructor) {
+    container = $('<div id="' + this.containerId + '" />');
     container.html(html);
   } else {
     container = '<div id="' + this.containerId + '">' + html + '</div>';
   }
-  jQuery('body').append(container);
+  $('body').append(container);
 };
 
-jQueryFixtures.prototype.getFixtureHtml_ = function(url) {  
+jsFixtures.prototype.getFixtureHtml_ = function(url) {  
   if (typeof this.fixturesCache_[url] == 'undefined') {
     this.loadFixtureIntoCache_(url);
   }
   return this.fixturesCache_[url];
 };
 
-jQueryFixtures.prototype.loadFixtureIntoCache_ = function(relativeUrl) {
+jsFixtures.prototype.loadFixtureIntoCache_ = function(relativeUrl) {
   var self = this;
   var url = this.fixturesPath.match('/$') ? this.fixturesPath + relativeUrl : this.fixturesPath + '/' + relativeUrl;
-  jQuery.ajax({
+  $.ajax({
     async: false, // must be synchronous to guarantee that no tests are run before fixture is loaded
     cache: false,
     dataType: 'html',
@@ -96,11 +96,17 @@ jQueryFixtures.prototype.loadFixtureIntoCache_ = function(relativeUrl) {
       self.fixturesCache_[relativeUrl] = data;
     },
     error: function(jqXHR, status, errorThrown) {
-        throw Error('Fixture could not be loaded: ' + url + ' (status: ' + status + ', message: ' + errorThrown.message + ')');
+        throw new Error('Fixture could not be loaded: ' + url + ' (status: ' + status + ', message: ' + (errorThrown ? errorThrown.message : "") + ')');
     }
   });
 };
 
-jQueryFixtures.prototype.proxyCallTo_ = function(methodName, passedArguments) {
+jsFixtures.prototype.proxyCallTo_ = function(methodName, passedArguments) {
   return this[methodName].apply(this, passedArguments);
 };
+
+if (typeof(afterEach) !== "undefined") {
+  afterEach(function() {
+    jsFixtures.getFixtures().cleanUp();
+  });
+}
