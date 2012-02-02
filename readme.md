@@ -1,6 +1,6 @@
 # Expect-dom
 
-A set of additional assertions for the expect.js assertion library to help when testing web
+A set of additional assertions for the [expect.js](https://github.com/LearnBoost/expect.js) assertion library to help when testing web
 applications. The assertions verify the existence and state of DOM elements on the page. 
 
 This project was derived from the jasmine-jquery project (many thanks to the creators of that project). 
