@@ -1,12 +1,12 @@
 {
   "author": "Kevin Dente",
-  "name": "expect-jquery",
-  "description": "JQuery matchers for expect",
+  "name": "expect-dom",
+  "description": "DOM assertions for expect.js",
   "version": "0.0.1",
   "repository": {
-    "url": ""
+    "url": "https://github.com/kevindente/expect-dom"
   },
-  "main": "expect-jquery.js",
+  "main": "expect-dom.js",
   "engines": {
     "node": "~0.6.7"
   },
