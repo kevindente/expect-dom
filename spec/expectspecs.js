@@ -262,7 +262,7 @@ describe("to.exist", function() {
   });
 });
 
-describe("to.be", function() {
+describe("to.matchSelector", function() {
   beforeEach(function() {
     setFixtures(sandbox());
   });

@@ -137,7 +137,6 @@
       this.assert(events && events[eventName] && events[eventName].length > 0,
                   "Expected element to handle event '" + eventName + "'", 
                   "Expected element to not handle event '" + eventName + "'" 
- 
                  );
     },
    
