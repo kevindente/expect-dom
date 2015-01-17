@@ -142,7 +142,9 @@
 
     handleWith: function(eventName, eventHandler) {
       var stack = this.obj.data("events")[eventName];
-      if (!stack) this.assert(false, "No events bound for '" + eventName + "'");
+      if (!stack)
+        this.assert(false, function() { return "No events bound for '" + eventName + "'"; });
+
       var i;
       for (i = 0; i < stack.length; i++) {
         if (stack[i].handler === eventHandler) {
@@ -150,7 +152,7 @@
         }
       }
 
-      this.assert(false, "No matching handler found for '" + eventName + "'");
+      this.assert(false, function() { return "No matching handler found for '" + eventName + "'"; });
     }
 
   };
