@@ -99,7 +99,7 @@
 
     html: function(html) {
       var actualHtml = DOM(this.obj).getHtml();
-      assert(this, actualHtml === normalizeHtmlTagCase(html),
+      assert(this, actualHtml === normalizeHtml(html),
         "Expected element to have html '" + html + "' but had '" + actualHtml + "'",
         "Expected element to not have html '" + actualHtml + "'");
     },
@@ -194,8 +194,10 @@
     },
   };
 
-  function normalizeHtmlTagCase(html) {
-    return $('<div/>').append(html).html();
+  function normalizeHtml(html) {
+    var element = document.createElement('div');
+    element.innerHTML = html;
+    return element.innerHTML;
   }
 
   function assert(self, truth, msg, error) {
