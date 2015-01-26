@@ -17,7 +17,8 @@
   };
 
   DOM.prototype.getAttr = function (attrName) {
-    return this.element.attributes[attrName] && this.element.attributes[attrName].value;
+    var attr = this.element.attributes[attrName];
+    return attr && attr.value;
   };
 
   DOM.prototype.getId = function () {
