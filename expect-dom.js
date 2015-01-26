@@ -192,36 +192,6 @@
         "Expected element to be disabled",
         "Expected element to not be disabled");
     },
-
-    handle: function(eventName) {
-      if (!this.obj.jquery) {
-        throw 'assert handle event on pure DOM is not supported';
-      }
-
-      var events = this.obj.data("events");
-      assert(this, events && events[eventName] && events[eventName].length > 0,
-        "Expected element to handle event '" + eventName + "'",
-        "Expected element to not handle event '" + eventName + "'");
-    },
-
-    handleWith: function(eventName, eventHandler) {
-      if (!this.obj.jquery) {
-        throw 'assert handleWith event on pure DOM is not supported';
-      }
-
-      var stack = this.obj.data("events")[eventName];
-      if (!stack)
-        assert(this, false, "No events bound for '" + eventName + "'");
-
-      var i;
-      for (i = 0; i < stack.length; i++) {
-        if (stack[i].handler === eventHandler) {
-          return;
-        }
-      }
-
-      assert(this, false, "No matching handler found for '" + eventName + "'");
-    }
   };
 
   function normalizeHtmlTagCase(html) {
