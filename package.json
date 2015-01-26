@@ -2,7 +2,7 @@
   "author": "Kevin Dente",
   "name": "expect-dom",
   "description": "DOM-related assertions for expect.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "url": "https://github.com/kevindente/expect-dom"
   },
