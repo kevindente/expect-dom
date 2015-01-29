@@ -30,7 +30,7 @@
   };
 
   DOM.prototype.getText = function () {
-    return this.element.textContent;
+    return this.element.textContent || this.element.innerText;
   };
 
   DOM.prototype.getValue = function () {
@@ -62,7 +62,8 @@
                         this.element.webkitMatchesSelector ||
                         this.element.mozMatchesSelector ||
                         this.element.oMatchesSelector ||
-                        this.element.msMatchesSelector;
+                        this.element.msMatchesSelector ||
+                        matchesPolyfill;
 
     return matchSelector.call(this.element, selector);
   };
@@ -206,6 +207,18 @@
     self.assert(truth,
       function () { return msg; },
       function () { return error; });
+  }
+
+  function matchesPolyfill(selector) {
+    var element = this;
+    var matches = (element.document || element.ownerDocument).querySelectorAll(selector);
+    var i = 0;
+
+    while (matches[i] && matches[i] !== element) {
+      i++;
+    }
+
+    return matches[i] ? true : false;
   }
 
   if (typeof expect === "undefined" || typeof expect.Assertion !== "function") {
