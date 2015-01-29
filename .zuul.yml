@@ -16,8 +16,8 @@ browsers:
   - name: opera
     version: latest
   - name: iphone
-    version: 4.3..latest
+    version: oldest..latest
   - name: ipad
-    version: 4.3..latest
+    version: oldest..latest
   - name: android
-    version: 2.3..latest
+    version: oldest..latest
