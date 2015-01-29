@@ -61,6 +61,7 @@
     var matchSelector = this.element.matches ||
                         this.element.webkitMatchesSelector ||
                         this.element.mozMatchesSelector ||
+                        this.element.oMatchesSelector ||
                         this.element.msMatchesSelector;
 
     return matchSelector.call(this.element, selector);
