@@ -1,0 +1,6 @@
+ui: mocha-bdd
+scripts:
+  - "vendor/jsfixtures.js"
+  - "vendor/jquery-1.7.1.js"
+  - "vendor/expect.js"
+  - "expect-dom.js"
