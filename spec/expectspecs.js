@@ -301,7 +301,7 @@ describe("to.exist", function() {
     expect($('#non-existent-element')).not.to.exist();
 
     expect(function () {
-      expect(document.getElementById('sandbox')).not.to.exist();
+      expect(document.getElementById('non-existent-element')).not.to.exist();
     }).to.throwException(function (e) {
       expect(e).to.contain('DOM').and.to.contain('jQuery object');
     });
