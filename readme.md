@@ -1,5 +1,10 @@
 # Expect-dom
 
+[![Sauce Test Status][sauce-image]][sauce-url]
+
+[sauce-image]: https://saucelabs.com/browser-matrix/lijunle_expect-dom.svg
+[sauce-url]: https://saucelabs.com/u/lijunle_expect-dom
+
 A set of additional assertions for the [expect.js][1] assertion library to help
 when testing web applications. The assertions verify the existence and state
 of DOM elements on the page.
