@@ -4,3 +4,20 @@ scripts:
   - "vendor/jquery-1.7.1.js"
   - "vendor/expect.js"
   - "expect-dom.js"
+browsers:
+  - name: ie
+    version: 8..latest
+  - name: chrome
+    version: latest
+  - name: firefox
+    version: latest
+  - name: safari
+    version: latest
+  - name: opera
+    version: latest
+  - name: iphone
+    version: latest
+  - name: ipad
+    version: latest
+  - name: android
+    version: latest
