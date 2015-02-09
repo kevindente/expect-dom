@@ -1,6 +1,7 @@
 {
   "author": "Kevin Dente",
-  "name": "expect-dom",
+  "maintainers": "Junle Li <lijunle@gmail.com> (https://github.com/lijunle)",
+  "name": "expect-dom.js",
   "description": "DOM-related assertions for expect.js",
   "version": "0.0.2",
   "repository": {
