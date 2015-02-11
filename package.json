@@ -1,15 +1,18 @@
 {
   "author": "Kevin Dente",
+  "maintainers": "Junle Li <lijunle@gmail.com> (https://github.com/lijunle)",
   "name": "expect-dom",
   "description": "DOM-related assertions for expect.js",
-  "version": "0.0.1",
-  "repository": {
-    "url": "https://github.com/kevindente/expect-dom"
-  },
+  "version": "1.0.0",
   "main": "expect-dom.js",
-  "engines": {
-    "node": ">=0.6"
+  "repository": {
+    "url": "https://github.com/lijunle/expect-dom.js"
+  },
+  "scripts": {
+    "test": "zuul -- spec/expectspecs.js"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "zuul": "^1.16.5"
+  }
 }
